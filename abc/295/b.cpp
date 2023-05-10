@@ -4,25 +4,32 @@ using namespace std;
 int main() {
     int R,C;
     cin >> R >> C;
-    vector<string> vec(R);
-    for(string &s : vec) cin >> s;
-    vector<vector<bool>> seen(R, vector<bool>(C, false));
+    vector<string> s(R);
+    for(string &t : s) cin >> t;
+
+    vector<vector<bool>> bombFlag(R,(vector<bool>(C,false)));
     for(int i = 0; i < R; i++){
         for(int j = 0; j < C; j++){
-            if(!isdigit(vec[i][j])) continue;
-            int num = vec[i][j] - '0';
-            for(int ni = 0; ni < R; ni++){
-                for(int nj = 0; nj < C; nj++){
-                    if(abs(i-ni) + abs(j-nj) <= num) seen[ni][nj] = true;
+            if(isdigit(s[i][j])){
+                int power = s[i][j] - '0';
+                for(int ni = 0; ni < R; ni++){
+                    for(int nj = 0; nj < C; nj++){
+                        if(abs(ni-i) + abs(nj-j) <= power){
+                            bombFlag[ni][nj] = true;
+                        }
+                    }
                 }
             }
         }
     }
+
     for(int i = 0; i < R; i++){
         for(int j = 0; j < C; j++){
-            if(seen[i][j]) vec[i][j] = '.';
+            if(bombFlag[i][j]){
+                s[i][j] = '.';
+            }
         }
     }
-    for (string &s : vec) cout << s << endl;
-    return 0;
+
+    for(string &t : s) cout << t << endl;
 }
