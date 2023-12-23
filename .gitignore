@@ -34,6 +34,7 @@
 # Other
 .git
 .mode
+.swp
 input
 contest
 test
