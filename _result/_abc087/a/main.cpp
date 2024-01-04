@@ -6,9 +6,6 @@ int main() {
     int x,a,b;
     cin >> x >> a >> b;
     x -= a;
-    while(x-b >= 0){
-        x -= b;
-    }
-    cout << x << endl;
+    cout << x%b << endl;
     return 0;
 }
